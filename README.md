@@ -6,7 +6,7 @@ It uses only the Java standard library.
 ## Running it in IntelliJ
 
 1. **File > Open** and pick this folder.
-2. If IntelliJ asks for an SDK, choose any JDK 17 or newer.
+2. If IntelliJ asks for an SDK, use temurin 21
 3. Open `src/oregontrail/Main.java` and click the green run arrow.
 
 ## How the code is organized
