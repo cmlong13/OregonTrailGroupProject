@@ -1,0 +1,14 @@
+# Build output
+out/
+*.class
+
+# IntelliJ per-user files (the shared project files in .idea are committed)
+.idea/workspace.xml
+.idea/usage.statistics.xml
+.idea/shelf/
+.idea/tasks.xml
+.idea/dictionaries/
+
+# OS files
+.DS_Store
+Thumbs.db
