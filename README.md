@@ -27,15 +27,15 @@ Search for `TODO` to see what's left. Each TODO names its owner:
 - **events owner:** everything in `oregontrail.events` and `oregontrail.trail`
 - **game owner:** `Game`, `ConsoleUI`, `Store`
 
-## Schedule (due about Nov 30)
+## Schedule (due Nov 22)
 
-| Week | Goal |
+| Dates | Goal |
 | --- | --- |
 | Oct 30 to Nov 6 | Fill in the MVP stubs, each person in their own package |
-| Nov 7 to 13 | MVP plays start to finish; add unit tests |
-| Nov 14 to 20 | Classic features: rivers, hunting, trading, illnesses, score |
-| Nov 21 to 27 | Feature freeze Nov 24, then Javadoc, README, OOP pillars sheet |
-| Nov 28 to 30 | Rehearse the presentation; buffer |
+| Nov 7 to 12 | Connect the pieces so the MVP plays start to finish; add unit tests |
+| Nov 13 to 17 | Classic features: rivers, hunting, trading, illnesses, score. Feature freeze Nov 17 |
+| Nov 18 to 20 | Javadoc, README, OOP pillars sheet, final bug fixes |
+| Nov 21 | Rehearse the presentation |
 
 ## Working together
 
