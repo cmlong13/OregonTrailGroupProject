@@ -16,13 +16,10 @@ public class Trail {
     private final TreeMap<Integer, Location> stops = new TreeMap<>();
 
     public Trail() {
-        addStop(new Landmark("Chimney Rock", 550, "A tall spire of rock rises from the plains."));
-        addStop(new Fort("Fort Laramie", 640));
-        addStop(new Landmark("Independence Rock", 830, "Travelers carve their names into the rock."));
-        addStop(new Landmark("South Pass", 930, "You cross the Continental Divide."));
-        addStop(new Landmark("Soda Springs", 1150, "Bubbling springs line the trail."));
-        addStop(new Landmark("Blue Mountains", 1700, "The last big climb before Oregon."));
-        addStop(new Destination("the Willamette Valley", LENGTH));
+        // TODO (events owner): add the stops. Suggested (miles are rough):
+        //   Landmark Chimney Rock 550, Fort Fort Laramie 640, Landmark Independence Rock 830,
+        //   Landmark South Pass 930, Landmark Soda Springs 1150, Landmark Blue Mountains 1700,
+        //   Destination Willamette Valley at LENGTH
     }
 
     private void addStop(Location location) {
@@ -31,12 +28,13 @@ public class Trail {
 
     /** @return the first stop at or after this mile, or null if none is left */
     public Location nextStop(int mile) {
-        var entry = stops.ceilingEntry(mile);
-        return entry == null ? null : entry.getValue();
+        // TODO (events owner): TreeMap.ceilingEntry(mile) finds this in O(log n).
+        return null;
     }
 
     /** @return the stops after fromMile and up to and including toMile, in order */
     public List<Location> stopsPassed(int fromMile, int toMile) {
-        return new ArrayList<>(stops.subMap(fromMile, false, toMile, true).values());
+        // TODO (events owner): TreeMap.subMap(fromMile, false, toMile, true) gives exactly these stops.
+        return new ArrayList<>();
     }
 }

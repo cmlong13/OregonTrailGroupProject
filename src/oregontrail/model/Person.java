@@ -22,18 +22,17 @@ public class Person implements Describable {
 
     /** Lowers health, never below 0. */
     public void damage(int amount) {
-        // TODO (model owner): clamp at 0 and reject negative amounts.
-        health -= amount;
+        // TODO (model owner): reject a negative amount, subtract it, never go below 0.
     }
 
     /** Raises health, never above {@link #MAX_HEALTH}. */
     public void heal(int amount) {
-        // TODO (model owner): clamp at MAX_HEALTH and reject negative amounts.
-        health += amount;
+        // TODO (model owner): reject a negative amount, add it, never go above MAX_HEALTH.
     }
 
     public boolean isAlive() {
-        return health > 0;
+        // TODO (model owner)
+        return true;
     }
 
     public String getName() {

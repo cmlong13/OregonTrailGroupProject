@@ -14,15 +14,12 @@ public class Inventory {
     private final Map<ItemType, Integer> items = new EnumMap<>(ItemType.class);
 
     public Inventory() {
-        for (ItemType type : ItemType.values()) {
-            items.put(type, 0);
-        }
+        // TODO (model owner): start every ItemType at 0.
     }
 
     /** Adds a positive amount of an item. */
     public void add(ItemType type, int amount) {
-        // TODO (model owner): reject negative amounts.
-        items.merge(type, amount, Integer::sum);
+        // TODO (model owner): reject a negative amount, then add it to the current count.
     }
 
     /**
@@ -31,11 +28,13 @@ public class Inventory {
      * @throws InsufficientSuppliesException if there is not enough on hand
      */
     public void remove(ItemType type, int amount) throws InsufficientSuppliesException {
-        // TODO (model owner): throw InsufficientSuppliesException when get(type) < amount.
-        items.put(type, items.get(type) - amount);
+        // TODO (model owner):
+        //   if there is less than amount on hand, throw InsufficientSuppliesException
+        //   otherwise subtract amount from the current count
     }
 
     public int get(ItemType type) {
-        return items.get(type);
+        // TODO (model owner)
+        return 0;
     }
 }

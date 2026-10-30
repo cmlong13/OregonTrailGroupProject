@@ -19,13 +19,15 @@ public class Wagon implements Describable {
 
     /** Moves the wagon forward by the current pace. */
     public void travelOneDay() {
-        // TODO (model owner): no oxen means no travel.
-        milesTraveled += pace.getMilesPerDay();
+        // TODO (model owner): if there are no oxen, don't move; otherwise add the pace's miles per day.
     }
 
     /** Uses one day of food for every living member of the party. */
     public void feed(Party party) {
-        // TODO (model owner): remove food; if there is not enough, eat what is left and hurt everyone.
+        // TODO (model owner):
+        //   food needed = rations pounds per person x number of living members
+        //   try to remove that much food from the inventory
+        //   if there isn't enough (InsufficientSuppliesException): eat what is left and damage everyone
     }
 
     public Inventory getInventory() {

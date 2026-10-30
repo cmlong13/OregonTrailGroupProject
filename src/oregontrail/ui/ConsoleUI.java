@@ -27,7 +27,10 @@ public class ConsoleUI {
      * @return the chosen option number, from 1 to options.length
      */
     public int showMenu(String title, String[] options) {
-        // TODO (game owner): print the title and numbered options, then return readInt(1, options.length).
+        // TODO (game owner):
+        //   print the title
+        //   print each option with its number (1, 2, 3...)
+        //   return readInt(1, number of options)
         return 1;
     }
 
@@ -36,7 +39,12 @@ public class ConsoleUI {
      * Never throws on bad input.
      */
     public int readInt(int min, int max) {
-        // TODO (game owner): read a line, catch NumberFormatException, re-ask when out of range.
+        // TODO (game owner):
+        //   loop:
+        //     read a line and try to turn it into an int
+        //     if it is not a number (NumberFormatException), say so and ask again
+        //     if it is outside min..max, say the allowed range and ask again
+        //     otherwise return it
         return min;
     }
 

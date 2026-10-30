@@ -14,6 +14,5 @@ public class FindWildFood extends TrailEvent {
     @Override
     public void apply(Game game) {
         // TODO (events owner): Add some food to the inventory (a good event).
-        game.getUi().print(describe() + "!");
     }
 }

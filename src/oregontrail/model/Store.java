@@ -17,12 +17,18 @@ public class Store {
      * @throws InsufficientFundsException if the player cannot afford it
      */
     public void buy(ItemType type, int qty, Game game) throws InsufficientFundsException {
-        game.spendMoney(type.getPrice() * qty);
-        game.getWagon().getInventory().add(type, qty);
+        // TODO (game owner):
+        //   cost = item price x qty
+        //   spend the money through the game (this throws if the player can't afford it)
+        //   add qty of the item to the wagon's inventory
     }
 
     /** Shows the store menu until the player leaves. */
     public void open(Game game) {
-        // TODO (game owner): menu of items with prices, ask for quantity, catch InsufficientFundsException.
+        // TODO (game owner):
+        //   loop until the player picks "leave":
+        //     show each ItemType with its price and how much money is left
+        //     ask which item and how many
+        //     try buy(); if InsufficientFundsException, show its message and continue
     }
 }

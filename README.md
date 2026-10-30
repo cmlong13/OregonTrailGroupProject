@@ -20,7 +20,7 @@ It uses only the Java standard library.
 | `oregontrail.trail` | Abstract `Location`, `Landmark`/`Fort`/`Destination`, and `Trail` |
 | `oregontrail.exceptions` | `InsufficientFundsException`, `InsufficientSuppliesException` |
 
-Every class compiles and the game starts, but most methods are stubs.
+Every class compiles and the game starts, but the methods are empty: each one has a TODO with pseudocode for what it should do.
 Search for `TODO` to see what's left. Each TODO names its owner:
 
 - **model owner:** everything in `oregontrail.model` except `Store`

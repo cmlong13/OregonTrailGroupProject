@@ -22,7 +22,8 @@ public class EventGenerator {
     /** Pass a seeded Random to get the same events every run (useful for tests). */
     public EventGenerator(Random rng) {
         this.rng = rng;
-        this.events = List.of(new Illness(), new WagonBreakdown(), new BadWeather(), new FindWildFood());
+        // TODO (events owner): fill this with one of each TrailEvent subclass.
+        this.events = List.of();
     }
 
     /**
@@ -30,7 +31,11 @@ public class EventGenerator {
      *         by weight, so higher-weight events come up more often.
      */
     public Optional<TrailEvent> rollForEvent() {
-        // TODO (events owner): with DAILY_EVENT_CHANCE, pick an event using the weights.
+        // TODO (events owner):
+        //   if a random number from 0 to 1 is at or above DAILY_EVENT_CHANCE, return empty
+        //   total = sum of every event's weight
+        //   pick a random number from 0 to total - 1
+        //   walk the list, subtracting each weight, and return the event where the number drops below 0
         return Optional.empty();
     }
 }

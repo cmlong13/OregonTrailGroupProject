@@ -17,7 +17,6 @@ public class Fort extends Location {
 
     @Override
     public void onArrive(Game game) {
-        game.getUi().print("You have reached " + getName() + ".");
-        // TODO (events owner): ask whether to shop, then store.open(game).
+        // TODO (events owner): print that the party reached the fort, ask whether to shop, if yes store.open(game).
     }
 }

@@ -16,6 +16,6 @@ public class Landmark extends Location {
 
     @Override
     public void onArrive(Game game) {
-        game.getUi().print("You have reached " + getName() + ". " + description);
+        // TODO (events owner): print that the party reached this landmark, then its description.
     }
 }

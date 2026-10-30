@@ -1,15 +1,11 @@
 package oregontrail;
 
 import oregontrail.events.EventGenerator;
-import oregontrail.events.TrailEvent;
 import oregontrail.exceptions.InsufficientFundsException;
 import oregontrail.model.Party;
 import oregontrail.model.Wagon;
-import oregontrail.trail.Location;
 import oregontrail.trail.Trail;
 import oregontrail.ui.ConsoleUI;
-
-import java.util.Optional;
 
 /**
  * Runs the game: setup, the store, and the day-by-day loop until the party
@@ -42,8 +38,13 @@ public class Game {
 
     /** Runs setup, then plays days until {@link #isOver()} is true. */
     public void start() {
-        // TODO (game owner): name the party, open the store, then loop playDay() until isOver().
-        ui.print("Welcome to the Oregon Trail! (starter project: game loop not written yet)");
+        // TODO (game owner):
+        //   print a welcome message
+        //   for PARTY_SIZE people: ask for a name, add a new Person to the party
+        //   open the store so the player can buy supplies
+        //   while the game is not over: playDay()
+        //   print the win or lose screen
+        ui.print("Welcome to the Oregon Trail! (starter project: nothing is written yet)");
     }
 
     /**
@@ -51,25 +52,20 @@ public class Game {
      * possible stop. See the game loop diagram in the design doc.
      */
     public void playDay() {
-        // TODO (game owner): show the daily menu and handle the choice.
-        int milesBefore = wagon.getMilesTraveled();
-        wagon.travelOneDay();
-        wagon.feed(party);
-        party.applyDailyHealth(wagon.getRations(), wagon.getPace());
-
-        Optional<TrailEvent> event = events.rollForEvent();
-        event.ifPresent(e -> e.apply(this)); // polymorphism: the subclass decides what happens
-
-        for (Location stop : trail.stopsPassed(milesBefore, wagon.getMilesTraveled())) {
-            stop.onArrive(this); // polymorphism: Landmark, Fort or Destination
-        }
-        day++;
+        // TODO (game owner):
+        //   show the status line and the daily menu
+        //   if the player picks something other than "continue", handle it and show the menu again
+        //   remember the miles before traveling
+        //   wagon travels one day, feeds the party, party takes daily health change
+        //   ask the event generator for an event; if there is one, call its apply(this)
+        //   for each stop the trail says we passed today, call its onArrive(this)
+        //   add one to the day counter
     }
 
     /** @return true when everyone has died, the party is stranded, or it reached Oregon */
     public boolean isOver() {
-        // TODO (game owner): also end the game when food or oxen run out.
-        return arrived || party.isWipedOut();
+        // TODO (game owner): over if arrived, if the party is wiped out, or if food or oxen ran out.
+        return true;
     }
 
     /**
@@ -79,15 +75,14 @@ public class Game {
      * @throws InsufficientFundsException if the player cannot afford it
      */
     public void spendMoney(int amount) throws InsufficientFundsException {
-        if (amount > money) {
-            throw new InsufficientFundsException(amount, money);
-        }
-        money -= amount;
+        // TODO (game owner):
+        //   if amount is more than money, throw InsufficientFundsException
+        //   otherwise subtract amount from money
     }
 
     /** Marks the game as won; called by {@link oregontrail.trail.Destination}. */
     public void markArrived() {
-        arrived = true;
+        // TODO (game owner)
     }
 
     public ConsoleUI getUi() {

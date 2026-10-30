@@ -13,7 +13,6 @@ public class Destination extends Location {
 
     @Override
     public void onArrive(Game game) {
-        game.getUi().print("You made it to " + getName() + "!");
-        game.markArrived();
+        // TODO (events owner): print the arrival message and tell the game the party arrived.
     }
 }

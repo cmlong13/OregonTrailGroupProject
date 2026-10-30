@@ -14,6 +14,5 @@ public class WagonBreakdown extends TrailEvent {
     @Override
     public void apply(Game game) {
         // TODO (events owner): Use a spare part if there is one; otherwise lose days or get stranded.
-        game.getUi().print(describe() + "!");
     }
 }
