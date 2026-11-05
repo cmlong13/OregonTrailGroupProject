@@ -15,15 +15,26 @@ public class EventGenerator {
     private final List<TrailEvent> events;
     private final Random rng;
 
+    /** Creates a generator with an unseeded Random. */
     public EventGenerator() {
         this(new Random());
     }
 
-    /** Pass a seeded Random to get the same events every run (useful for tests). */
+    /**
+     * Pass a seeded Random to get the same events every run (useful for tests).
+     *
+     * @param rng the random source to use
+     */
     public EventGenerator(Random rng) {
         this.rng = rng;
-        // TODO (events owner): fill this with one of each TrailEvent subclass.
-        this.events = List.of();
+        this.events = List.of(
+                new Illness(),
+                new BadWeather(),
+                new FindWildFood(),
+                new WagonBreakdown(),
+                new Thief(),
+                new FriendlyTraveler(),
+                new LostOx());
     }
 
     /**
@@ -31,11 +42,20 @@ public class EventGenerator {
      *         by weight, so higher-weight events come up more often.
      */
     public Optional<TrailEvent> rollForEvent() {
-        // TODO (events owner):
-        //   if a random number from 0 to 1 is at or above DAILY_EVENT_CHANCE, return empty
-        //   total = sum of every event's weight
-        //   pick a random number from 0 to total - 1
-        //   walk the list, subtracting each weight, and return the event where the number drops below 0
-        return Optional.empty();
+        if (rng.nextDouble() >= DAILY_EVENT_CHANCE) {
+            return Optional.empty();
+        }
+        int total = 0;
+        for (TrailEvent e : events) {
+            total += e.getWeight();
+        }
+        int roll = rng.nextInt(total);
+        for (TrailEvent e : events) {
+            roll -= e.getWeight();
+            if (roll < 0) {
+                return Optional.of(e);
+            }
+        }
+        return Optional.empty(); // unreachable, but Java needs a return
     }
 }
