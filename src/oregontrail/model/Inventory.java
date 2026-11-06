@@ -17,7 +17,9 @@ public class Inventory {
         // TODO (model owner): start every ItemType at 0.
     }
 
-    /** Adds a positive amount of an item. */
+    /**
+     * Adds a positive amount of an item.
+     */
     public void add(ItemType type, int amount) {
         // TODO (model owner): reject a negative amount, then add it to the current count.
     }
@@ -31,6 +33,14 @@ public class Inventory {
         // TODO (model owner):
         //   if there is less than amount on hand, throw InsufficientSuppliesException
         //   otherwise subtract amount from the current count
+    }
+
+    /**
+     * Removes up to amount of an item and returns how many were actually removed.
+     */
+    public int removeUpTo(ItemType type, int amount) {
+        // TODO (model owner): remove the smaller of amount and the current count, return it.
+        return 0;
     }
 
     public int get(ItemType type) {
