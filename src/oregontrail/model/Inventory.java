@@ -30,7 +30,9 @@ public class Inventory {
      * @throws InsufficientSuppliesException if there is not enough on hand
      */
     public void remove(ItemType type, int amount) throws InsufficientSuppliesException {
-        // TODO (model owner): ...
+        // TODO (model owner):
+        //   if there is less than amount on hand, throw InsufficientSuppliesException
+        //   otherwise subtract amount from the current count
     }
 
     /**
@@ -42,6 +44,7 @@ public class Inventory {
     }
 
     public int get(ItemType type) {
-        return 1;
+        // TODO (model owner)
+        return 0;
     }
 }
