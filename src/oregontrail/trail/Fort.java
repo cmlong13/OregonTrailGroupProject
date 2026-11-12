@@ -12,7 +12,7 @@ public class Fort extends Location {
 
     public Fort(String name, int mile) {
         super(name, mile);
-        this.store = new Store();
+        this.store = new Store(name + " Trading Post");
     }
 
     @Override
