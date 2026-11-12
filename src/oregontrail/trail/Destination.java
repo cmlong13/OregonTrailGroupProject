@@ -11,8 +11,10 @@ public class Destination extends Location {
         super(name, mile);
     }
 
+    /** Announces the arrival and tells the game the party won. */
     @Override
     public void onArrive(Game game) {
-        // TODO (events owner): print the arrival message and tell the game the party arrived.
+        game.getUi().print("At last, the green fields of the Willamette Valley come into view!");
+        game.markArrived();
     }
 }
