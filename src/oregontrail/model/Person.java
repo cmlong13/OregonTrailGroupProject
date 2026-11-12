@@ -43,9 +43,29 @@ public class Person implements Describable {
         return health;
     }
 
+    /**
+     * Turns a health number into a word the player can read at a glance.
+     * It is static because it only needs the number, not a Person, so the game
+     * can also use it for the party's average health: Person.healthWord(55).
+     *
+     * @param health a health value from 0 to {@link #MAX_HEALTH}
+     * @return "Good" for 70 and up, "Fair" for 40 and up, "Poor" above 0, otherwise "Dead"
+     */
+    public static String healthWord(int health) {
+        if (health >= 70) {
+            return "Good";
+        } else if (health >= 40) {
+            return "Fair";
+        } else if (health > 0) {
+            return "Poor";
+        } else {
+            return "Dead";
+        }
+    }
+
+    /** @return the name and a health word, for example "Mary - Good" */
     @Override
     public String describe() {
-        // TODO (model owner): show a word like Good, Fair, Poor or Dead instead of a number.
-        return name + " (health " + health + ")";
+        return name + " - " + healthWord(health);
     }
 }
