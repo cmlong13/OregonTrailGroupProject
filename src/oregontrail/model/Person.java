@@ -11,28 +11,47 @@ public class Person implements Describable {
     private final String name;
     private int health;
 
+    /** Creates a person at full health. */
     public Person(String name) {
         this(name, MAX_HEALTH);
     }
 
+    /** Creates a person with a specific starting health (clamped to 0..MAX_HEALTH). */
     public Person(String name, int health) {
         this.name = name;
-        this.health = health;
+        this.health = Math.max(0, Math.min(MAX_HEALTH, health));
     }
 
-    /** Lowers health, never below 0. */
+    /**
+     * Lowers health, never below 0.
+     *
+     * @throws IllegalArgumentException if amount is negative
+     */
     public void damage(int amount) {
-        // TODO (model owner): reject a negative amount, subtract it, never go below 0.
+        if (amount < 0) {
+            throw new IllegalArgumentException("Damage cannot be negative: " + amount);
+        }
+        health = Math.max(0, health - amount);
     }
 
-    /** Raises health, never above {@link #MAX_HEALTH}. */
+    /**
+     * Raises health, never above {@link #MAX_HEALTH}. The dead stay dead.
+     *
+     * @throws IllegalArgumentException if amount is negative
+     */
     public void heal(int amount) {
-        // TODO (model owner): reject a negative amount, add it, never go above MAX_HEALTH.
+        if (amount < 0) {
+            throw new IllegalArgumentException("Healing cannot be negative: " + amount);
+        }
+        if (!isAlive()) {
+            return;
+        }
+        health = Math.min(MAX_HEALTH, health + amount);
     }
 
+    /** @return true while health is above 0 */
     public boolean isAlive() {
-        // TODO (model owner)
-        return true;
+        return health > 0;
     }
 
     public String getName() {
@@ -43,9 +62,19 @@ public class Person implements Describable {
         return health;
     }
 
+    /** @return the name plus a word (Good, Fair, Poor or Dead) instead of a number */
     @Override
     public String describe() {
-        // TODO (model owner): show a word like Good, Fair, Poor or Dead instead of a number.
-        return name + " (health " + health + ")";
+        String status;
+        if (health >= 70) {
+            status = "Good";
+        } else if (health >= 40) {
+            status = "Fair";
+        } else if (health > 0) {
+            status = "Poor";
+        } else {
+            status = "Dead";
+        }
+        return name + ": " + status;
     }
 }

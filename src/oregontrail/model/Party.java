@@ -16,20 +16,33 @@ public class Party {
 
     /** @return the members who are still alive */
     public List<Person> getAlive() {
-        // TODO (model owner): return only the members where isAlive() is true.
-        return new ArrayList<>();
+        List<Person> alive = new ArrayList<>();
+        for (Person p : members) {
+            if (p.isAlive()) {
+                alive.add(p);
+            }
+        }
+        return alive;
     }
 
+    /** @return true when nobody is alive */
     public boolean isWipedOut() {
-        // TODO (model owner): true when nobody is alive.
-        return false;
+        return getAlive().isEmpty();
     }
 
-    /** Applies one day of health change from rations and pace to every living member. */
+    /**
+     * Applies one day of health change from rations and pace to every living member.
+     * A positive total damages them; a negative total heals them.
+     */
     public void applyDailyHealth(Rations rations, Pace pace) {
-        // TODO (model owner):
-        //   for each living member: damage by rations health cost + pace health cost
-        //   (a negative total means heal instead)
+        int total = rations.getHealthCost() + pace.getHealthCost();
+        for (Person p : getAlive()) {
+            if (total > 0) {
+                p.damage(total);
+            } else if (total < 0) {
+                p.heal(-total);
+            }
+        }
     }
 
     public List<Person> getMembers() {
