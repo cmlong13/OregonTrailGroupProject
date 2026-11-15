@@ -1,9 +1,9 @@
+
 package oregontrail.model;
 
-/**
- * Supplies the player can buy. Prices are starting values to tune once we can play.
- */
+// These are the different supplies available in the game.
 public enum ItemType {
+
     FOOD(1, "pound"),
     OXEN(40, "ox"),
     CLOTHING(10, "set"),
@@ -18,11 +18,14 @@ public enum ItemType {
         this.unit = unit;
     }
 
+    // Returns the price of the item.
     public int getPrice() {
         return price;
     }
 
+    // Returns how the item is measured.
     public String getUnit() {
         return unit;
     }
 }
+
