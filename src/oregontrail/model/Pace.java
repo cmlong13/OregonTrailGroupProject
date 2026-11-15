@@ -1,3 +1,4 @@
+
 package oregontrail.model;
 
 // Determines how fast the group travels each day.

@@ -1,3 +1,4 @@
+
 package oregontrail.model;
 
 // Classes that implement this can describe themselves.

@@ -1,3 +1,4 @@
+
 package oregontrail.model;
 
 // These are the different supplies available in the game.
