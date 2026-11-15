@@ -1,4 +1,3 @@
-
 package oregontrail.model;
 
 import oregontrail.exceptions.InsufficientSuppliesException;
@@ -19,7 +18,9 @@ public class Inventory {
         }
     }
 
-    // Adds supplies to the inventory.
+    /**
+     * Adds a positive amount of an item.
+     */
     public void add(ItemType type, int amount) {
         Objects.requireNonNull(type, "Item type cannot be null");
 

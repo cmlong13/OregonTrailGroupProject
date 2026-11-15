@@ -15,6 +15,12 @@ public class Game {
 
     public static final int STARTING_MONEY = 800;
     public static final int PARTY_SIZE = 5;
+    private static final String[]
+    MAIN_MENU = {
+            "Travel the trail",
+            "Learn about the trail",
+            "Quit"
+    };
 
     private final ConsoleUI ui;
     private final Party party;
@@ -44,7 +50,24 @@ public class Game {
         //   open the store so the player can buy supplies
         //   while the game is not over: playDay()
         //   print the win or lose screen
-        ui.print("Welcome to the Oregon Trail! (starter project: nothing is written yet)");
+        ui.print("=== THE OREGON TRAIL ===");
+
+        boolean ready = false;
+        while (!ready) {
+            int choice = ui.showMenu("MAIN MENU", MAIN_MENU);
+            switch (choice) {
+                case 1:
+                    ready = true;
+                    break;
+                case 2:
+                    showTrailInfo();
+                    break;
+                case 3:
+                    ui.print("Goodbye!");
+                    return;
+            }
+        }
+// next: name the party, open the store, play days, show win or lose
     }
 
     /**
@@ -83,6 +106,27 @@ public class Game {
     /** Marks the game as won; called by {@link oregontrail.trail.Destination}. */
     public void markArrived() {
         // TODO (game owner)
+    }
+    /** Gives the player money; called by FriendlyTraveler. */
+    public void addMoney(int amount) {
+        // TODO (game owner): reject a negative amount, then add it to money.
+    }
+
+    /** Ends the game because the wagon can't be fixed; called by WagonBreakdown. */
+    public void markStranded() {
+        // TODO (game owner): set a stranded flag, and make isOver() return true when it is set.
+    }
+
+    /** Passes days without traveling, such as while fixing the wagon; called by WagonBreakdown. */
+    public void skipDays(int days) {
+        // TODO (game owner): each day feed the party, apply rations health, add one to day.
+    }
+
+    /** Prints a short intro to the trail, then waits for Enter. */
+    private void showTrailInfo() {
+        ui.print("The trail runs " + Trail.LENGTH + " miles from Independence, Missouri, to the Willamette Valley.");
+        ui.print("Buy supplies, keep your party fed and healthy, and reach Oregon before winter.");
+        ui.pause();
     }
 
     public ConsoleUI getUi() {

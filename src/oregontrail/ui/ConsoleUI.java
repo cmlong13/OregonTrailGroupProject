@@ -6,6 +6,7 @@ import java.util.Scanner;
  * Every line the player sees and every key they type goes through this class,
  * so input checking lives in one place.
  */
+
 public class ConsoleUI {
 
     private final Scanner in;
@@ -31,7 +32,15 @@ public class ConsoleUI {
         //   print the title
         //   print each option with its number (1, 2, 3...)
         //   return readInt(1, number of options)
-        return 1;
+        if (options == null || options.length == 0) {
+            throw new IllegalArgumentException("A menu needs at least one option");
+        }
+        print("");
+        print(title);
+        for (int i = 0; i < options.length; i++) {
+            print((i + 1) + ". "  + options[i]);
+        }
+        return readInt(1, options.length);
     }
 
     /**
