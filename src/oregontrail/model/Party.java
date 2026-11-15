@@ -1,38 +1,57 @@
+
 package oregontrail.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-/**
- * The travelers in the wagon.
- */
 public class Party {
 
+    // Keeps track of everyone traveling in the group.
     private final List<Person> members = new ArrayList<>();
 
+    // Adds a new person to the traveling group.
     public void addMember(Person person) {
-        members.add(person);
+        members.add(Objects.requireNonNull(
+                person, "Person cannot be null"
+        ));
     }
 
-    /** @return the members who are still alive */
+    // Returns a list of everyone who is still alive.
     public List<Person> getAlive() {
-        // TODO (model owner): return only the members where isAlive() is true.
-        return new ArrayList<>();
+        List<Person> alive = new ArrayList<>();
+
+        for (Person person : members) {
+            if (person.isAlive()) {
+                alive.add(person);
+            }
+        }
+
+        return alive;
     }
 
+    // Checks whether the entire group has died.
     public boolean isWipedOut() {
-        // TODO (model owner): true when nobody is alive.
-        return false;
+        return getAlive().isEmpty();
     }
 
-    /** Applies one day of health change from rations and pace to every living member. */
+    // Applies the daily health changes from food and travel.
     public void applyDailyHealth(Rations rations, Pace pace) {
-        // TODO (model owner):
-        //   for each living member: damage by rations health cost + pace health cost
-        //   (a negative total means heal instead)
+        int total = rations.getHealthCost()
+                + pace.getHealthCost();
+
+        for (Person person : getAlive()) {
+            if (total > 0) {
+                person.damage(total);
+            } else if (total < 0) {
+                person.heal(-total);
+            }
+        }
     }
 
+    // Returns a copy of the full group.
     public List<Person> getMembers() {
         return List.copyOf(members);
     }
 }
+

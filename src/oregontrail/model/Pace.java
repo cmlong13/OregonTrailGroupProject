@@ -1,9 +1,9 @@
+
 package oregontrail.model;
 
-/**
- * How hard the party travels. Faster means more miles but more health lost.
- */
+// Determines how fast the group travels each day.
 public enum Pace {
+
     STEADY(12, 0),
     STRENUOUS(16, 3),
     GRUELING(20, 6);
@@ -16,10 +16,12 @@ public enum Pace {
         this.healthCost = healthCost;
     }
 
+    // Returns how many miles the wagon travels.
     public int getMilesPerDay() {
         return milesPerDay;
     }
 
+    // Returns how much health is lost from traveling.
     public int getHealthCost() {
         return healthCost;
     }
