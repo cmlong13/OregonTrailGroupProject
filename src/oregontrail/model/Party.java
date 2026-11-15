@@ -1,51 +1,57 @@
+
 package oregontrail.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-/**
- * The travelers in the wagon.
- */
 public class Party {
 
+    // Keeps track of everyone traveling in the group.
     private final List<Person> members = new ArrayList<>();
 
+    // Adds a new person to the traveling group.
     public void addMember(Person person) {
-        members.add(person);
+        members.add(Objects.requireNonNull(
+                person, "Person cannot be null"
+        ));
     }
 
-    /** @return the members who are still alive */
+    // Returns a list of everyone who is still alive.
     public List<Person> getAlive() {
         List<Person> alive = new ArrayList<>();
-        for (Person p : members) {
-            if (p.isAlive()) {
-                alive.add(p);
+
+        for (Person person : members) {
+            if (person.isAlive()) {
+                alive.add(person);
             }
         }
+
         return alive;
     }
 
-    /** @return true when nobody is alive */
+    // Checks whether the entire group has died.
     public boolean isWipedOut() {
         return getAlive().isEmpty();
     }
 
-    /**
-     * Applies one day of health change from rations and pace to every living member.
-     * A positive total damages them; a negative total heals them.
-     */
+    // Applies the daily health changes from food and travel.
     public void applyDailyHealth(Rations rations, Pace pace) {
-        int total = rations.getHealthCost() + pace.getHealthCost();
-        for (Person p : getAlive()) {
+        int total = rations.getHealthCost()
+                + pace.getHealthCost();
+
+        for (Person person : getAlive()) {
             if (total > 0) {
-                p.damage(total);
+                person.damage(total);
             } else if (total < 0) {
-                p.heal(-total);
+                person.heal(-total);
             }
         }
     }
 
+    // Returns a copy of the full group.
     public List<Person> getMembers() {
         return List.copyOf(members);
     }
 }
+
