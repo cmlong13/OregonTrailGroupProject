@@ -1,3 +1,4 @@
+
 package oregontrail.model;
 
 import java.util.Objects;
