@@ -1,4 +1,3 @@
-
 package oregontrail.model;
 
 import java.util.ArrayList;
