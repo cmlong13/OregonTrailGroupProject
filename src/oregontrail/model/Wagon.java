@@ -1,33 +1,67 @@
 package oregontrail.model;
 
-/**
- * The wagon: its supplies, how far it has gone, and the player's pace and rations.
- */
+import oregontrail.exceptions.InsufficientSuppliesException;
+
 public class Wagon implements Describable {
+
+    private static final int STARVATION_DAMAGE = 10;
 
     private final Inventory inventory;
     private int milesTraveled;
     private Pace pace;
     private Rations rations;
 
+    // Creates a new wagon with no supplies and a steady pace.
     public Wagon() {
-        this.inventory = new Inventory();
-        this.milesTraveled = 0;
-        this.pace = Pace.STEADY;
-        this.rations = Rations.FILLING;
+        inventory = new Inventory();
+        milesTraveled = 0;
+        pace = Pace.STEADY;
+        rations = Rations.FILLING;
     }
 
-    /** Moves the wagon forward by the current pace. */
+    // Moves the wagon forward if the player has oxen.
     public void travelOneDay() {
-        // TODO (model owner): if there are no oxen, don't move; otherwise add the pace's miles per day.
+        if (inventory.get(ItemType.OXEN) <= 0) {
+            return;
+        }
+
+        milesTraveled += pace.getMilesPerDay();
     }
 
-    /** Uses one day of food for every living member of the party. */
-    public void feed(Party party) {
-        // TODO (model owner):
-        //   food needed = rations pounds per person x number of living members
-        //   try to remove that much food from the inventory
-        //   if there isn't enough (InsufficientSuppliesException): eat what is left and damage everyone
+    // Gives food to the party and handles shortages.
+    public boolean feed(Party party) {
+        if (party == null) {
+            throw new IllegalArgumentException(
+                    "Party cannot be null"
+            );
+        }
+
+        int livingMembers = party.getAlive().size();
+
+        if (livingMembers == 0) {
+            return true;
+        }
+
+        int needed = Math.multiplyExact(
+                rations.getPoundsPerPerson(),
+                livingMembers
+        );
+
+        try {
+            inventory.remove(ItemType.FOOD, needed);
+            return true;
+
+        } catch (InsufficientSuppliesException e) {
+
+            // Uses whatever food is left and lowers everyone's health.
+            inventory.removeUpTo(ItemType.FOOD, needed);
+
+            for (Person person : party.getAlive()) {
+                person.damage(STARVATION_DAMAGE);
+            }
+
+            return false;
+        }
     }
 
     public Inventory getInventory() {
@@ -42,7 +76,14 @@ public class Wagon implements Describable {
         return pace;
     }
 
+    // Changes the wagon's travel speed.
     public void setPace(Pace pace) {
+        if (pace == null) {
+            throw new IllegalArgumentException(
+                    "Pace cannot be null"
+            );
+        }
+
         this.pace = pace;
     }
 
@@ -50,12 +91,22 @@ public class Wagon implements Describable {
         return rations;
     }
 
+    // Changes how much food each traveler receives.
     public void setRations(Rations rations) {
+        if (rations == null) {
+            throw new IllegalArgumentException(
+                    "Rations cannot be null"
+            );
+        }
+
         this.rations = rations;
     }
 
+    // Displays basic information about the wagon.
     @Override
     public String describe() {
-        return "Miles traveled: " + milesTraveled + " | Pace: " + pace + " | Rations: " + rations;
+        return "Miles traveled: " + milesTraveled
+                + " | Pace: " + pace
+                + " | Rations: " + rations;
     }
 }
