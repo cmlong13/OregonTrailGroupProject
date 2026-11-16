@@ -1,9 +1,8 @@
 package oregontrail.model;
 
-/**
- * How much each person eats per day. Less food means more health lost.
- */
+// Determines how much food each traveler receives.
 public enum Rations {
+
     FILLING(3, -2),
     MEAGER(2, 1),
     BARE_BONES(1, 4);
@@ -16,11 +15,13 @@ public enum Rations {
         this.healthCost = healthCost;
     }
 
+    // Returns how much food each person eats daily.
     public int getPoundsPerPerson() {
         return poundsPerPerson;
     }
 
-    /** @return health lost per day; negative means health is gained */
+    // Returns the health change from the current food amount.
+    // A negative number means health is restored.
     public int getHealthCost() {
         return healthCost;
     }
